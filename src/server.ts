@@ -1,4 +1,6 @@
+import fs = require('fs');
 import http = require('http');
+import path = require('path');
 
 import { createNewLink, getLinkByHash } from './dal';
 import { checkDbConnection } from './dal/connection';
@@ -11,6 +13,8 @@ if (!APP_PORT) {
 const GET = 'GET';
 const POST = 'POST';
 const FAVICON = 'favicon.ico';
+const INDEX = '/';
+const INDEX_PATH = path.join(process.cwd(), 'static', 'index.html');
 
 const COMPRESS_ENDPOINT = '/compress';
 
@@ -26,8 +30,15 @@ checkDbConnection().then(() => {
             if (req.url === undefined) {
                break;
             }
+
+            if (req.url === INDEX) {
+               const fileStream = fs.createReadStream(INDEX_PATH);
+               fileStream.pipe(res);
+               return;
+            }
+
             const urlPath = req.url.substring(1);
-            console.log({urlPath});
+            console.log({ urlPath });
 
             if (urlPath === FAVICON) {
                res.writeHead(204);
@@ -35,7 +46,7 @@ checkDbConnection().then(() => {
             }
 
             const link = await getLinkByHash(urlPath);
-            console.log({link});
+            console.log({ link });
             if (link !== undefined) {
                res.writeHead(302, {
                   'Location': link,
@@ -62,7 +73,7 @@ checkDbConnection().then(() => {
                }
 
                const body = Buffer.concat(chunks).toString();
-               let parsedBody: {link?: string};
+               let parsedBody: { link?: string };
                try {
                   parsedBody = JSON.parse(body);
                } catch {
