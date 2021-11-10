@@ -30,6 +30,7 @@
 
          btn.addEventListener('click', () => {
             output.textContent = '';
+            btn.disabled = true;
 
             const link = input.value;
             fetch(location.origin + '/compress', {
@@ -38,7 +39,8 @@
             })
                .then((res) => res.text())
                .then((text) => output.textContent = text)
-               .catch((err) => output.textContent = err.message);
+               .catch((err) => output.textContent = err.message)
+               .finally(() => btn.disabled = false);
          });
       </script>
    </body>
