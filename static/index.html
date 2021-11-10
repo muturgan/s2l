@@ -6,6 +6,11 @@
       <title>S2L</title>
       <meta name="description" content="a silly simple short links generator" />
       <link rel="icon" href="favicon.avif">
+      <style>
+         .margin {
+            margin-top: 0.67em;
+         }
+      </style>
    </head>
    <body>
       <label for="link">
@@ -14,9 +19,9 @@
       <form>
          <input type="text" id="link">
          <br>
-         <button type="button">Compress</button>
+         <button type="button" class="margin">Compress</button>
          <br>
-         <output></output>
+         <output class="margin"></output>
       </form>
       <script>
          const input = document.querySelector('input');
