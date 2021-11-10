@@ -29,6 +29,8 @@
          const output = document.querySelector('output');
 
          btn.addEventListener('click', () => {
+            output.textContent = '';
+
             const link = input.value;
             fetch(location.origin + '/compress', {
                method: 'POST',
