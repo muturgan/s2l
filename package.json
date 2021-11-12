@@ -1,7 +1,7 @@
 {
   "name": "s2l",
   "version": "1.0.0",
-  "description": "a silly simple short links generator",
+  "description": "amazing backend for a silly simple S2L short links generator",
   "author": "Andrey Sakharov <caxap_8787@mail.ru> (https://www.linkedin.com/in/andrey-sakharov/)",
   "private": true,
   "license": "MIT",

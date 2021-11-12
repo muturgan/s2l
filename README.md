@@ -1,2 +1,2 @@
 # s2l
-a silly simple short links generator
+amazing backend for a silly simple S2L short links generator
