@@ -3,6 +3,8 @@ import { ResultSetHeader } from 'mysql2';
 
 import { pool } from './connection';
 
+import { Result } from '../models/result';
+
 const BITES_LENGTH = 4;
 const APP_DOMAIN = process.env.APP_DOMAIN;
 if (!APP_DOMAIN) {
@@ -76,7 +78,7 @@ const insertNewLink = async (link: string, hash: string): Promise<void> => {
    }
 };
 
-export const createNewLink = async (link: string): Promise<string> => {
+export const createNewLink = async (link: string): Promise<Result> => {
    const newLinkUrl = new URL(APP_DOMAIN);
    const existingHash = await getHashByLink(link);
 
@@ -90,5 +92,5 @@ export const createNewLink = async (link: string): Promise<string> => {
       newLinkUrl.pathname = hash;
    }
 
-   return newLinkUrl.toString();
+   return new Result(newLinkUrl);
 };

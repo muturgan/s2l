@@ -4,6 +4,7 @@ import path = require('path');
 
 import { createNewLink, getLinkByHash } from './dal';
 import { checkDbConnection } from './dal/connection';
+import { Result } from './models/result';
 
 const APP_PORT = process.env.APP_PORT;
 if (!APP_PORT) {
@@ -96,7 +97,7 @@ checkDbConnection().then(() => {
                }
 
                const urlStr = linkUrl.toString();
-               let newShortLink: string;
+               let newShortLink: Result;
                try {
                   newShortLink = await createNewLink(urlStr);
                   res.writeHead(200);
